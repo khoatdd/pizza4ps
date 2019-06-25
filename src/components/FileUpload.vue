@@ -41,7 +41,7 @@
           <input
             type="file"
             :id="inputName + 'Hidden'"
-            @change="newValue(inputName + 'Visible', inputName + 'Hidden')"
+            @change="newValue(inputName + 'Visible', inputName + 'Hidden'); $emit('fileHasChanged', $event)"
           />
         </md-field>
       </template>
@@ -58,7 +58,7 @@
             <input
               type="file"
               :id="inputName + 'Hidden'"
-              @change="newValue(inputName + 'Visible', inputName + 'Hidden')"
+              @change="newValue(inputName + 'Visible', inputName + 'Hidden'); $emit('fileHasChanged', $event)"
               v-if="!multiple"
             />
             <input
@@ -66,7 +66,7 @@
               :id="inputName + 'Hidden'"
               :multiple="multiple"
               @change="
-                newValueMultiple(inputName + 'Visible', inputName + 'Hidden')
+                newValueMultiple(inputName + 'Visible', inputName + 'Hidden'); $emit('fileHasChanged', $event)
               "
               v-else
             />
@@ -134,6 +134,7 @@ export default {
       element.click();
     },
     newValue(visibleID, hiddenID) {
+      console.log("File changed");
       let element = document.getElementById(hiddenID);
       let visibleElem = document.getElementById(visibleID);
       let elemValue = element.value;
